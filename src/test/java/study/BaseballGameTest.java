@@ -1,5 +1,6 @@
 package study;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.*;
@@ -8,6 +9,7 @@ import static org.assertj.core.api.Assertions.*;
 
 
 class BaseballGameTest {
+
 
     @Test
     void getThreeRandomNumsTest() {
@@ -23,25 +25,43 @@ class BaseballGameTest {
     }
 
     @Test
-    void howManyMatchTest() {
+    void howManyMatchAndPrintResultTest() {
         List<Integer> entry = new ArrayList<>();
         entry.add(2);
         entry.add(6);
         entry.add(3);
-
         String value1 = "214"; // 1스트라이크
         String value2 = "213"; // 2스트라이크
         String value3 = "613"; // 1볼 1스트라이크
         String value4 = "145"; // 낫싱
 
-        assertThat(howManyMatch(entry, value1)).containsExactly(0, 1);
-        assertThat(howManyMatch(entry, value2)).containsExactly(0, 2);
-        assertThat(howManyMatch(entry, value3)).containsExactly(1, 1);
-        assertThat(howManyMatch(entry, value4)).containsExactly(0, 0);
+        int[] res1 = howManyMatch(entry, value1);
+        int[] res2 = howManyMatch(entry, value2);
+        int[] res3 = howManyMatch(entry, value3);
+        int[] res4 = howManyMatch(entry, value4);
+
+        assertThat(res1).containsExactly(0, 1);
+        assertThat(printResult(res1)).isEqualTo("1스트라이크");
+
+        assertThat(res2).containsExactly(0, 2);
+        assertThat(printResult(res2)).isEqualTo("2스트라이크");
+
+        assertThat(res3).containsExactly(1, 1);
+        assertThat(printResult(res3)).isEqualTo("1볼 1스트라이크");
+
+        assertThat(res4).containsExactly(0, 0);
+        assertThat(printResult(res4)).isEqualTo("낫싱");
+    }
+
+    private String printResult(int[] result) {
+        if (result[0] == 0 && result[1] == 0) return "낫싱";
+        else if (result[0] == 0 && result[1] > 0) return result[1] + "스트라이크";
+        else if (result[0] > 0 && result[1] == 0) return result[0] + "볼";
+        else if (result[0] > 0 && result[1] > 0) return result[0] + "볼 " + result[1] + "스트라이크";
+        return null;
     }
 
     /**
-     *
      * @param entry
      * @param value
      * @return 볼과 스트라이크 순서대로 배열 반환
