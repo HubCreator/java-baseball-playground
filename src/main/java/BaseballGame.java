@@ -2,23 +2,38 @@ import java.util.*;
 
 public class BaseballGame {
     public static void main(String[] args) {
-        Set<Integer> set = new HashSet<>();
-        Scanner scanner = new Scanner(System.in);
 
-
-        while (set.size() < 3) {
-            set.add(new Random().nextInt(9) + 1);
+        String startOrExit = "1";
+        while (startOrExit.equals("1")) {
+            Set<Integer> nums = new HashSet<>();
+            Scanner scanner = new Scanner(System.in);
+            getNums(nums);
+            List<Integer> entry = new ArrayList<>(nums);
+            int[] result = new int[2];
+            logic(scanner, entry, result);
+            printEndMessages();
+            startOrExit = scanner.nextLine();
         }
+    }
 
-        List<Integer> entry = new ArrayList<>(set);
-        int[] result = new int[2];
+    private static void printEndMessages() {
+        System.out.println("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+        System.out.println("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.");
+    }
+
+    private static void logic(Scanner scanner, List<Integer> entry, int[] result) {
         while (result[1] < 3) {
             System.out.print("숫자를 입력해 주세요 : ");
             String value = scanner.nextLine();
             result = howManyMatch(entry, value);
             printResult(result);
         }
-        System.out.println("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+    }
+
+    private static void getNums(Set<Integer> nums) {
+        while (nums.size() < 3) {
+            nums.add(new Random().nextInt(9) + 1);
+        }
     }
 
     private static void printResult(int[] result) {
