@@ -1,22 +1,26 @@
 import java.util.Objects;
 
 public class Ball {
-    private final int index;
-    private final int no;
+    private final int position;
+    private final int ballNo;
 
     public Ball(int position, int ballNo) {
-        this.index = position;
-        this.no = ballNo;
+        this.position = position;
+        this.ballNo = ballNo;
     }
 
-    public BallStatus play(Ball user) {
-        if (this.equals(user)) {
+    public BallStatus play(Ball ball) {
+        if (this.equals(ball)) {
             return BallStatus.STRIKE;
         }
-        if (this.no == user.no) {
+        if (ball.matchBallNo(ballNo)) {
             return BallStatus.BALL;
         }
         return BallStatus.NOTHING;
+    }
+
+    private boolean matchBallNo(int ballNo) {
+        return this.ballNo == ballNo;
     }
 
     @Override
@@ -24,11 +28,11 @@ public class Ball {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Ball ball = (Ball) o;
-        return index == ball.index && no == ball.no;
+        return position == ball.position && ballNo == ball.ballNo;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(index, no);
+        return Objects.hash(position, ballNo);
     }
 }
