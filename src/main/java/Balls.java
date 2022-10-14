@@ -19,7 +19,7 @@ public class Balls {
     public BallStatus play(Ball userBall) {
         return answers.stream()
                 .map((answer) -> answer.play(userBall))
-                .filter(status -> status != BallStatus.NOTHING)
+                .filter(BallStatus::isNotNothing)
                 .findFirst()
                 .orElse(BallStatus.NOTHING);
     }
