@@ -23,9 +23,22 @@ public class BallsTest {
 
     @Test
     void one_ball() {
-        PlayResult result = com.play(Arrays.asList(4, 5, 1));
-        assertThat(result.getBall()).isEqualTo(1);
-        assertThat(result.getStrike()).isEqualTo(0);
+        PlayResult result1 = com.play(Arrays.asList(4, 5, 1));
+        PlayResult result2 = com.play(Arrays.asList(4, 3, 8));
+        assertThat(result1.getBall()).isEqualTo(1);
+        assertThat(result1.getStrike()).isEqualTo(0);
+        assertThat(result2.getBall()).isEqualTo(1);
+        assertThat(result2.getStrike()).isEqualTo(0);
+    }
+
+    @Test
+    void two_ball() {
+        PlayResult result1 = com.play(Arrays.asList(3, 5, 1));
+        PlayResult result2 = com.play(Arrays.asList(4, 3, 2));
+        assertThat(result1.getBall()).isEqualTo(2);
+        assertThat(result1.getStrike()).isEqualTo(0);
+        assertThat(result2.getBall()).isEqualTo(2);
+        assertThat(result2.getStrike()).isEqualTo(0);
     }
 
     @Test
