@@ -1,5 +1,7 @@
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+
 import static org.assertj.core.api.Assertions.*;
 
 public class ValidationTest {
@@ -14,19 +16,29 @@ public class ValidationTest {
 
     @Test
     void threeNumTest() {
-        assertThat(ValidationUtil.isSizeOfThree(123)).isTrue();
-        assertThat(ValidationUtil.isSizeOfThree(12)).isFalse();
-        assertThat(ValidationUtil.isSizeOfThree(1234)).isFalse();
+        assertThat(ValidationUtil.isSizeOfThree(Arrays.asList(1, 2, 3))).isTrue();
+        assertThat(ValidationUtil.isSizeOfThree(Arrays.asList(1, 2))).isFalse();
+        assertThat(ValidationUtil.isSizeOfThree(Arrays.asList(1, 2, 3, 4))).isFalse();
     }
 
     @Test
     void duplicateTest() {
-        assertThat(ValidationUtil.hasDuplicatedNum(123)).isTrue();
-        assertThat(ValidationUtil.hasDuplicatedNum(12)).isTrue();
-        assertThat(ValidationUtil.hasDuplicatedNum(1)).isTrue();
+        assertThat(ValidationUtil.hasDuplicatedNum(Arrays.asList(1, 2, 3))).isTrue();
+        assertThat(ValidationUtil.hasDuplicatedNum(Arrays.asList(1, 2))).isTrue();
+        assertThat(ValidationUtil.hasDuplicatedNum(Arrays.asList(1))).isTrue();
 
-        assertThat(ValidationUtil.hasDuplicatedNum(122)).isFalse();
-        assertThat(ValidationUtil.hasDuplicatedNum(111)).isFalse();
-        assertThat(ValidationUtil.hasDuplicatedNum(1111)).isFalse();
+        assertThat(ValidationUtil.hasDuplicatedNum(Arrays.asList(1, 2, 2))).isFalse();
+        assertThat(ValidationUtil.hasDuplicatedNum(Arrays.asList(1, 1, 1))).isFalse();
+        assertThat(ValidationUtil.hasDuplicatedNum(Arrays.asList(1, 1, 1, 1))).isFalse();
     }
+
+    /*@Test
+    void totalValidationTest() {
+        assertThat(ValidationUtil.isValid(123)).isTrue();
+
+        assertThat(ValidationUtil.isValid(1234)).isFalse();
+        assertThat(ValidationUtil.isValid(12)).isFalse();
+
+        assertThat(ValidationUtil.isValid(122)).isFalse();
+    }*/
 }
