@@ -8,10 +8,10 @@ public class ValidationTest {
 
     @Test
     void rangeTest() {
-        assertThat(ValidationUtil.isValidRange(1)).isTrue();
-        assertThat(ValidationUtil.isValidRange(0)).isFalse();
-        assertThat(ValidationUtil.isValidRange(9)).isTrue();
-        assertThat(ValidationUtil.isValidRange(10)).isFalse();
+        assertThat(ValidationUtil.isValidRange(Arrays.asList(1))).isTrue();
+        assertThat(ValidationUtil.isValidRange(Arrays.asList(0))).isFalse();
+        assertThat(ValidationUtil.isValidRange(Arrays.asList(9))).isTrue();
+        assertThat(ValidationUtil.isValidRange(Arrays.asList(10))).isFalse();
     }
 
     @Test
@@ -32,13 +32,21 @@ public class ValidationTest {
         assertThat(ValidationUtil.hasDuplicatedNum(Arrays.asList(1, 1, 1, 1))).isFalse();
     }
 
-    /*@Test
+    @Test
     void totalValidationTest() {
-        assertThat(ValidationUtil.isValid(123)).isTrue();
+        assertThat(ValidationUtil.isValid(Arrays.asList(1,2,3))).isTrue();
 
-        assertThat(ValidationUtil.isValid(1234)).isFalse();
-        assertThat(ValidationUtil.isValid(12)).isFalse();
+        assertThat(ValidationUtil.isValid(Arrays.asList(1,2,3,4))).isFalse();
+        assertThat(ValidationUtil.isValid(Arrays.asList(1,2))).isFalse();
 
-        assertThat(ValidationUtil.isValid(122)).isFalse();
-    }*/
+        assertThat(ValidationUtil.isValid(Arrays.asList(1,2,10))).isFalse();
+        assertThat(ValidationUtil.isValid(Arrays.asList(0,2,9))).isFalse();
+
+        assertThat(ValidationUtil.isValid(Arrays.asList(1,1,2))).isFalse();
+        assertThat(ValidationUtil.isValid(Arrays.asList(1,9,9))).isFalse();
+
+        assertThat(ValidationUtil.isValid(Arrays.asList(0,1,2,3))).isFalse();
+        assertThat(ValidationUtil.isValid(Arrays.asList(1,2,3,10))).isFalse();
+        assertThat(ValidationUtil.isValid(Arrays.asList(1,10))).isFalse();
+    }
 }
