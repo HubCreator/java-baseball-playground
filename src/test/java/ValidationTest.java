@@ -11,4 +11,11 @@ public class ValidationTest {
         assertThat(ValidationUtil.isValidInput(9)).isTrue();
         assertThat(ValidationUtil.isValidInput(10)).isFalse();
     }
+
+    @Test
+    void threeNumTest() {
+        assertThat(ValidationUtil.isSizeOfThree(123)).isTrue();
+        assertThat(ValidationUtil.isSizeOfThree(12)).isFalse();
+        assertThat(ValidationUtil.isSizeOfThree(1234)).isFalse();
+    }
 }
