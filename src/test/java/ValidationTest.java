@@ -1,3 +1,4 @@
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -32,21 +33,37 @@ public class ValidationTest {
         assertThat(ValidationUtil.hasDuplicatedNum(Arrays.asList(1, 1, 1, 1))).isFalse();
     }
 
-    @Test
-    void totalValidationTest() {
-        assertThat(ValidationUtil.isValid(Arrays.asList(1,2,3))).isTrue();
+    @Nested
+    class TotalValidationTest {
+        @Test
+        void validTest() {
+            assertThat(ValidationUtil.isValid(Arrays.asList(1, 2, 3))).isTrue();
+        }
 
-        assertThat(ValidationUtil.isValid(Arrays.asList(1,2,3,4))).isFalse();
-        assertThat(ValidationUtil.isValid(Arrays.asList(1,2))).isFalse();
+        @Test
+        void inValidTest() {
+            assertThatThrownBy(() -> ValidationUtil.isValid(Arrays.asList(1, 2, 3, 4)))
+                    .isInstanceOf(IllegalArgumentException.class);
+            assertThatThrownBy(() -> ValidationUtil.isValid(Arrays.asList(1, 2)))
+                    .isInstanceOf(IllegalArgumentException.class);
 
-        assertThat(ValidationUtil.isValid(Arrays.asList(1,2,10))).isFalse();
-        assertThat(ValidationUtil.isValid(Arrays.asList(0,2,9))).isFalse();
+            assertThatThrownBy(() -> ValidationUtil.isValid(Arrays.asList(1, 2, 10)))
+                    .isInstanceOf(IllegalArgumentException.class);
+            assertThatThrownBy(() -> ValidationUtil.isValid(Arrays.asList(0, 2, 9)))
+                    .isInstanceOf(IllegalArgumentException.class);
 
-        assertThat(ValidationUtil.isValid(Arrays.asList(1,1,2))).isFalse();
-        assertThat(ValidationUtil.isValid(Arrays.asList(1,9,9))).isFalse();
+            assertThatThrownBy(() -> ValidationUtil.isValid(Arrays.asList(1, 1, 2)))
+                    .isInstanceOf(IllegalArgumentException.class);
+            assertThatThrownBy(() -> ValidationUtil.isValid(Arrays.asList(1, 9, 9)))
+                    .isInstanceOf(IllegalArgumentException.class);
 
-        assertThat(ValidationUtil.isValid(Arrays.asList(0,1,2,3))).isFalse();
-        assertThat(ValidationUtil.isValid(Arrays.asList(1,2,3,10))).isFalse();
-        assertThat(ValidationUtil.isValid(Arrays.asList(1,10))).isFalse();
+            assertThatThrownBy(() -> ValidationUtil.isValid(Arrays.asList(0, 1, 2, 3)))
+                    .isInstanceOf(IllegalArgumentException.class);
+            assertThatThrownBy(() -> ValidationUtil.isValid(Arrays.asList(1, 2, 3, 10)))
+                    .isInstanceOf(IllegalArgumentException.class);
+            assertThatThrownBy(() -> ValidationUtil.isValid(Arrays.asList(1, 10)))
+                    .isInstanceOf(IllegalArgumentException.class);
+        }
     }
+
 }

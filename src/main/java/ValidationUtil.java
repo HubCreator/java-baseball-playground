@@ -5,8 +5,7 @@ import java.util.Set;
 public class ValidationUtil {
     public static boolean isValid(List<Integer> list) {
         if (!isValidRange(list) || !isSizeOfThree(list) || !hasDuplicatedNum(list)) {
-//            throw new IllegalArgumentException("잘못된 값을 입력하셨습니다.");
-            return false;
+            throw new IllegalArgumentException("잘못된 값을 입력하셨습니다.");
         }
         return true;
     }
